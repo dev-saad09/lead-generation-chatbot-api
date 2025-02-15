@@ -1,0 +1,57 @@
+{
+    "cSpell.words": [
+        "Agri",
+        "callcenter",
+        "chdir",
+        "checkcompletionstatus",
+        "Childs",
+        "CSRTB",
+        "dncr",
+        "domwallettransactionviatoken",
+        "endregion",
+        "farmcrop",
+        "farmcrops",
+        "fieldname",
+        "fileinfo",
+        "getformparams",
+        "intraday",
+        "jazzcash",
+        "Lovs",
+        "Msisdn",
+        "MWALLET",
+        "posix",
+        "postgis",
+        "ppmpf",
+        "retreival",
+        "Rodb",
+        "scom",
+        "setformcompletion",
+        "setval",
+        "SRID",
+        "sshpass",
+        "surveyform",
+        "TIMESTAMPTZ",
+        "TIMETZ",
+        "ubkkuser",
+        "USERTYPE",
+        "USSD",
+        "uswitch",
+        "warid",
+        "zongbkk"
+    ],
+    // "yaml.format.enable": false,
+    // "yaml.validate": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "eslint.workingDirectories": ["./"],
+    "eslint.validate": ["javascript"],
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+    "cSpell.ignoreWords": [
+        "lman"
+    ],
+    "liveServer.settings.port": 5501
+}

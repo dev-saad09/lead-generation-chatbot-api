@@ -1,0 +1,2 @@
+project_path: "/home/switch/production/bkk_jazzcash_prod_api"
+ansible_ssh_common_args: '-o StrictHostKeyChecking=no'

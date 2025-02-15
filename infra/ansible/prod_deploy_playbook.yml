@@ -1,0 +1,35 @@
+- name: Production Deployment Playbook
+  hosts: prod_servers
+
+  tasks:
+  - name: Create Remote folder
+    file:
+      path: "{{ project_path }}"
+      state: directory
+    tags:
+    - folder
+
+  - name: Copying code
+    ansible.posix.synchronize:
+      src: ../../../
+      dest: "{{ project_path }}"
+      times: no
+      recursive: yes
+      rsync_opts:
+      - "--exclude=node_modules"
+      - "--exclude=infra"
+      - "--exclude=.git"
+      - "--exclude=package-lock.json"
+    tags:
+    - copy
+
+  - name: Restarting Processes
+    ansible.builtin.command:
+      cmd: "{{ restart_command }}"
+      chdir: "{{ project_path }}"
+    become: yes
+    become_user: "root"
+    tags:
+    - restart
+
+# ansible-playbook prod_deploy_playbook.yml -i ./inventory/hosts.yml
