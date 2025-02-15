@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-router.use("/jazzcash", require("./jazzcash"));
+router.use("/leads", require("./lead"));
 
 module.exports = router;

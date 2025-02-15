@@ -12,7 +12,5 @@ const db = knex({ client: "pg" });
 
 // mockKnex.mock(db);
 
-jest.mock("knex-postgis");
-
 const data = require("jest-extended");
 expect.extend(data);

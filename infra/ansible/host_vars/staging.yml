@@ -1,5 +1,0 @@
-ansible_host: "192.168.32.168"
-ansible_ssh_user: "switch"
-ansible_ssh_pass: "Switch@123"
-ansible_become_pass: "Switch@123"
-restart_command: "sudo -uswitch pm2 start ecosystem.config.js --node-args 'PM2_CONFIG_NAME=BKK_JAZZCASH_STG'"

@@ -22,8 +22,6 @@ log.info({
     DB_CON_MAX
 });
 
-const knexPostgis = require("knex-postgis");
-
 const db = require("knex")({
     client: DB_CLIENT,
     connection: {

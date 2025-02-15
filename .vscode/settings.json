@@ -1,43 +1,7 @@
 {
     "cSpell.words": [
-        "Agri",
-        "callcenter",
-        "chdir",
-        "checkcompletionstatus",
-        "Childs",
-        "CSRTB",
-        "dncr",
-        "domwallettransactionviatoken",
-        "endregion",
-        "farmcrop",
-        "farmcrops",
-        "fieldname",
-        "fileinfo",
-        "getformparams",
-        "intraday",
-        "jazzcash",
-        "Lovs",
-        "Msisdn",
-        "MWALLET",
-        "posix",
-        "postgis",
-        "ppmpf",
-        "retreival",
-        "Rodb",
-        "scom",
-        "setformcompletion",
-        "setval",
-        "SRID",
-        "sshpass",
-        "surveyform",
-        "TIMESTAMPTZ",
-        "TIMETZ",
-        "ubkkuser",
-        "USERTYPE",
-        "USSD",
-        "uswitch",
-        "warid",
-        "zongbkk"
+        "frameguard",
+        "cnic"
     ],
     // "yaml.format.enable": false,
     // "yaml.validate": false,
@@ -53,5 +17,4 @@
     "cSpell.ignoreWords": [
         "lman"
     ],
-    "liveServer.settings.port": 5501
 }
