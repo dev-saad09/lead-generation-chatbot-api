@@ -58,11 +58,11 @@ app.use(morgan("[:date] :remote-addr :method :url :response-time ms - :status"))
 app.use(express.static(path.join(__dirname, "public")));
 
 // API documentation
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
+app.use(`/api/${API_VERSION}/api-docs`, swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // Routes
-app.use(`/${API_VERSION}`, routes);
-app.use(`/${API_NAME}/${API_VERSION}`, routes);
+app.use(`/api/${API_VERSION}`, routes);
+app.use(`/api/${API_NAME}/${API_VERSION}`, routes);
 
 // Error handling middleware
 app.use(errorMiddleware());

@@ -12,12 +12,8 @@ module.exports = {
     },
     servers: [
         {
-            url: process.env.SWAGGER_BASE_API ? process.env.SWAGGER_BASE_API : "/",
+            url: process.env.SWAGGER_BASE_API ? process.env.SWAGGER_BASE_API : "/api/v1",
             description: "Server 1"
-        },
-        {
-            url: `http://localhost:${process.env.PORT}`,
-            description: "Server 2"
         }
     ],
     schemes: ["http", "https"],
@@ -53,7 +49,9 @@ module.exports = {
     },
     security: [
         {
-            bearerAuth: [],
+            bearerAuth: []
+        },
+        {
             basicAuth: []
         }
     ]

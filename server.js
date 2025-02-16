@@ -7,7 +7,8 @@ const swaggerAutogen = require("swagger-autogen")({ openapi: process.env.SWAGGER
 const {
     SWAGGER_OUTPUT_FILE,
     SWAGGER_ENDPOINT_DIR,
-    PORT
+    PORT,
+    API_VERSION = "v1"
 } = process.env;
 
 log.info({
@@ -20,7 +21,7 @@ async function main() {
     await swaggerAutogen(SWAGGER_OUTPUT_FILE, [SWAGGER_ENDPOINT_DIR], require("./swagger/index"));
     const app = require("./app");
     app.set("port", PORT);
-    http.createServer(app).listen(PORT, () => log.info(`server is listening on : http://localhost:${PORT}/api-docs`));
+    http.createServer(app).listen(PORT, () => log.info(`server is listening on : http://localhost:${PORT}/api/${API_VERSION}/api-docs`));
 }
 
 main();
