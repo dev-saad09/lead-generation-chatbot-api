@@ -3,7 +3,7 @@ module.exports = {
     info: {
         title: "API Documentation",
         version: process.env.SWAGGER_DOC_VERSION,
-        description: "Complete lead generation chatbot api information",
+        description: "Complete lead generation crm api information",
         contact: {
             name: "",
             url: "",

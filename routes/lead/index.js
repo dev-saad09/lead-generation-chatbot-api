@@ -5,19 +5,19 @@ const router = express.Router();
 const routerController = require("./lead.controller");
 
 /**
- * @route POST /leads/add-lead
+ * @route POST /leads
  * @desc Add a new lead
  * @access Private
  */
 router.post(
-    "/add-lead",
+    "/",
     authenticate(),
     async (req, res, next) => {
         try {
             logger.info({
                 user: req.user,
                 body: req.body,
-                method: "POST /leads/add-lead"
+                method: "POST /leads"
             });
 
             const result = await routerController.addLead(req.body);
@@ -28,7 +28,7 @@ router.post(
                 error,
                 user: req.user,
                 body: req.body,
-                method: "POST /leads/add-lead"
+                method: "POST /leads"
             });
             return next(error);
         }

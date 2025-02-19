@@ -14,7 +14,7 @@ const swaggerFile = require("./swagger-output.json");
 const expressErrorMiddleware = require("./middlewares/expressError.middleware");
 const errorMiddleware = require("./middlewares/error.middleware");
 
-const { REQUEST_BODY_SIZE_LIMIT, API_NAME = "lead-generation-chatbot-api", API_VERSION = "v1" } = process.env;
+const { REQUEST_BODY_SIZE_LIMIT, API_NAME = "lead-generation-crm-api", API_VERSION = "v1" } = process.env;
 
 // Initialize express app
 const app = express();

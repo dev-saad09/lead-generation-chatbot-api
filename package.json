@@ -1,7 +1,7 @@
 {
-    "name": "lead-generation-chatbot-api",
+    "name": "lead-generation-crm-api",
     "version": "1.0.0",
-    "description": "Lead generation chatbot api",
+    "description": "Lead generation crm api",
     "main": "server.js",
     "scripts": {
         "local:dev": "nodemon server.js --env-name local.api",
