@@ -13,6 +13,42 @@ router.post(
     "/",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Leads']
+      #swagger.description = 'Add a new lead.'
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          name: { type: 'string' },
+                          email: { type: 'string', format: 'email' },
+                          cellno: { type: 'string' },
+                          address: { type: 'string' },
+                          city: { type: 'string' },
+                          language: { type: 'string' },
+                          systemType: { type: 'string' },
+                          units: { type: 'integer' },
+                          billAmount: { type: 'integer' },
+                          totalArea: { type: 'integer' },
+                          billType: { type: 'string' },
+                          billImage: { type: 'string' },
+                          agentId: { type: 'string', format: 'uuid' },
+                          status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost'] }
+                      },
+                      required: ['name', 'email', 'cellno', 'address', 'city', 'language', 'systemType', 'units', 'billAmount', 'totalArea', 'billType', 'billImage', 'agentId']
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'Lead created successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+
+      }
+  */
         logger.info({
             user: req.user,
             body: req.body,
@@ -34,6 +70,14 @@ router.get(
     "/",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Leads']
+      #swagger.description = 'Get all leads.'
+      #swagger.responses[200] = {
+          description: 'Leads retrieved successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseArray' } } }
+      }
+    */
         logger.info({
             user: req.user,
             method: "GET /leads"
@@ -54,6 +98,21 @@ router.get(
     "/:id",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Leads']
+      #swagger.description = 'Get lead by ID.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'Lead ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.responses[200] = {
+          description: 'Lead retrieved successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             params: req.params,
@@ -75,6 +134,47 @@ router.put(
     "/:id",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Leads']
+      #swagger.description = 'Update lead by ID.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'Lead ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          name: { type: 'string' },
+                          email: { type: 'string', format: 'email' },
+                          cellno: { type: 'string' },
+                          address: { type: 'string' },
+                          city: { type: 'string' },
+                          language: { type: 'string' },
+                          systemType: { type: 'string' },
+                          units: { type: 'integer' },
+                          billAmount: { type: 'integer' },
+                          totalArea: { type: 'integer' },
+                          billType: { type: 'string' },
+                          billImage: { type: 'string' },
+                          agentId: { type: 'string', format: 'uuid' },
+                          status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost'] }
+                      }
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'Lead updated successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             params: req.params,
@@ -97,6 +197,21 @@ router.delete(
     "/:id",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Leads']
+      #swagger.description = 'Delete lead by ID.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'Lead ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.responses[200] = {
+          description: 'Lead deleted successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             params: req.params,

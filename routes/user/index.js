@@ -13,6 +13,31 @@ router.post(
     "/",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Add a new user.'
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          name: { type: 'string' },
+                          email: { type: 'string', format: 'email' },
+                          password: { type: 'string' },
+                          role: { type: 'string', enum: ['admin', 'agent'] }
+                      },
+                      required: ['name', 'email', 'password', 'role']
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'User created successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             body: req.body,
@@ -34,6 +59,14 @@ router.get(
     "/",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Get all users.'
+      #swagger.responses[200] = {
+          description: 'Users retrieved successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseArray' } } }
+      }
+    */
         logger.info({
             user: req.user,
             method: "GET /users"
@@ -54,6 +87,21 @@ router.get(
     "/:id",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Get user by ID.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'User ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.responses[200] = {
+          description: 'User retrieved successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             params: req.params,
@@ -75,6 +123,36 @@ router.put(
     "/:id",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Update user by ID.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'User ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          name: { type: 'string' },
+                          email: { type: 'string', format: 'email' },
+                          role: { type: 'string', enum: ['admin', 'agent'] }
+                      }
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'User updated successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             params: req.params,
@@ -97,6 +175,21 @@ router.delete(
     "/:id",
     authenticate(),
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Delete user by ID.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'User ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.responses[200] = {
+          description: 'User deleted successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             user: req.user,
             params: req.params,
@@ -117,6 +210,29 @@ router.delete(
 router.post(
     "/login",
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Login user.'
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          email: { type: 'string', format: 'email' },
+                          password: { type: 'string' }
+                      },
+                      required: ['email', 'password']
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'User logged in successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             body: req.body,
             method: "POST /users/login"
@@ -136,6 +252,28 @@ router.post(
 router.post(
     "/forgot-password",
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Request password reset.'
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          email: { type: 'string', format: 'email' }
+                      },
+                      required: ['email']
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'Password reset email sent successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             body: req.body,
             method: "POST /users/forgot-password"
@@ -155,6 +293,29 @@ router.post(
 router.post(
     "/reset-password",
     async (req, res, next) => {
+    /*
+      #swagger.tags = ['Users']
+      #swagger.description = 'Reset password with token.'
+      #swagger.requestBody = {
+          required: true,
+          content: {
+              "application/json": {
+                  schema: {
+                      type: 'object',
+                      properties: {
+                          token: { type: 'string' },
+                          password: { type: 'string' }
+                      },
+                      required: ['token', 'password']
+                  }
+              }
+          }
+      }
+      #swagger.responses[200] = {
+          description: 'Password reset successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
         logger.info({
             body: req.body,
             method: "POST /users/reset-password"
