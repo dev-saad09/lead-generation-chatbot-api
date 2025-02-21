@@ -41,7 +41,7 @@ class LeadController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 payload,
                 message: "Error adding lead",
                 method: "POST /leads"
@@ -64,7 +64,7 @@ class LeadController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 message: "Error getting leads",
                 method: "GET /leads"
             });
@@ -85,7 +85,7 @@ class LeadController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 id,
                 message: "Error getting lead",
                 method: "GET /leads/:id"
@@ -134,7 +134,7 @@ class LeadController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 id,
                 payload,
                 message: "Error updating lead",
@@ -158,7 +158,7 @@ class LeadController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 id,
                 message: "Error deleting lead",
                 method: "DELETE /leads/:id"

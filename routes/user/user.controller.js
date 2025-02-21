@@ -31,7 +31,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 payload,
                 message: "Error adding user",
                 method: "POST /users"
@@ -54,7 +54,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 message: "Error retrieving users",
                 method: "GET /users"
             });
@@ -76,7 +76,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 id,
                 message: "Error retrieving user",
                 method: "GET /users/:id"
@@ -115,7 +115,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 id,
                 payload,
                 message: "Error updating user",
@@ -139,7 +139,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 id,
                 message: "Error deleting user",
                 method: "DELETE /users/:id"
@@ -176,7 +176,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 payload,
                 message: "Error logging in user",
                 method: "POST /users/login"
@@ -212,7 +212,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 payload,
                 message: "Error processing forgot password request",
                 method: "POST /users/forgot-password"
@@ -249,7 +249,7 @@ class UserController {
             };
         } catch (error) {
             log.error({
-                error,
+                error: error.message,
                 payload,
                 message: "Error resetting password",
                 method: "POST /users/reset-password"
