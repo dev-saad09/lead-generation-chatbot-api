@@ -40,4 +40,14 @@ const db = require("knex")({
 
 Model.knex(db);
 
-module.exports = db;
+/** Utility to test DB connection */
+async function testConnection() {
+    try {
+        await db.raw("SELECT 1");
+        return true;
+    } catch (err) {
+        throw new Error("Database connection failed: " + err.message);
+    }
+}
+
+module.exports = { db, testConnection };

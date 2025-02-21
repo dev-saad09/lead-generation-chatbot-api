@@ -20,6 +20,18 @@ log.info({
 async function main() {
     await swaggerAutogen(SWAGGER_OUTPUT_FILE, [SWAGGER_ENDPOINT_DIR], require("./swagger/index"));
     const app = require("./app");
+
+    const { testConnection } = require("./db");
+
+    try {
+        log.info("Testing database connection...");
+        await testConnection();
+        log.info("Database connected successfully.");
+    } catch (error) {
+        log.error(error.message);
+        process.exit(1);
+    }
+
     app.set("port", PORT);
     http.createServer(app).listen(PORT, () => log.info(`server is listening on : http://localhost:${PORT}/api/${API_VERSION}/api-docs`));
 }

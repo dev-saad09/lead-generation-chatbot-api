@@ -1,11 +1,11 @@
 const moment = require("moment");
 const log = require("../../logger");
 const { ErrorData } = require("../../errors");
-const { Lead } = require("../../models");
+const { Leads } = require("../../models");
 
 class LeadService {
     async addLead(leadData) {
-        const lead = await Lead.query().insert({
+        const lead = await Leads.query().insert({
             ...leadData,
             createdAt: moment().format(),
             updatedAt: moment().format()
@@ -17,12 +17,12 @@ class LeadService {
     }
 
     async getLeads() {
-        const leads = await Lead.query();
+        const leads = await Leads.query();
         return leads;
     }
 
     async getLeadById(id) {
-        const lead = await Lead.query().findById(id);
+        const lead = await Leads.query().findById(id);
         if (!lead) {
             throw new ErrorData("Lead not found");
         }
@@ -30,12 +30,12 @@ class LeadService {
     }
 
     async updateLead(id, updateData) {
-        const lead = await Lead.query().findById(id);
+        const lead = await Leads.query().findById(id);
         if (!lead) {
             throw new ErrorData("Lead not found");
         }
 
-        const updatedLead = await Lead.query().patchAndFetchById(id, {
+        const updatedLead = await Leads.query().patchAndFetchById(id, {
             ...updateData,
             updatedAt: moment().format()
         });
@@ -45,12 +45,12 @@ class LeadService {
     }
 
     async deleteLead(id) {
-        const lead = await Lead.query().findById(id);
+        const lead = await Leads.query().findById(id);
         if (!lead) {
             throw new ErrorData("Lead not found");
         }
 
-        await Lead.query().deleteById(id);
+        await Leads.query().deleteById(id);
         log.info({ id }, "Successfully deleted lead");
         return true;
     }

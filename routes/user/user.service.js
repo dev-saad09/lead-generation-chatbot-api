@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const log = require("../../logger");
-const { User } = require("../../models");
+const { Users } = require("../../models");
 
 class UserService {
     async addUser(payload) {
@@ -10,7 +10,7 @@ class UserService {
         const hashedPassword = await bcrypt.hash(payload.password, salt);
 
         // Create user
-        const user = await User.query().insert({
+        const user = await Users.query().insert({
             name: payload.name,
             email: payload.email,
             password: hashedPassword,
@@ -21,16 +21,16 @@ class UserService {
     }
 
     async getUsers() {
-        const users = await User.query().select(
-            User.query().getAllColumns().filter(col => col !== "password")
+        const users = await Users.query().select(
+            Users.query().getAllColumns().filter(col => col !== "password")
         );
         return users;
     }
 
     async getUserById(id) {
-        const user = await User.query()
+        const user = await Users.query()
             .findById(id)
-            .select(User.query().getAllColumns().filter(col => col !== "password"));
+            .select(Users.query().getAllColumns().filter(col => col !== "password"));
 
         if (!user) {
             throw new Error("User not found");
@@ -39,7 +39,7 @@ class UserService {
     }
 
     async updateUser(id, payload) {
-        const user = await User.query().findById(id);
+        const user = await Users.query().findById(id);
         if (!user) {
             throw new Error("User not found");
         }
@@ -50,21 +50,21 @@ class UserService {
             payload.password = await bcrypt.hash(payload.password, salt);
         }
 
-        const updatedUser = await User.query().patchAndFetchById(id, payload);
+        const updatedUser = await Users.query().patchAndFetchById(id, payload);
         return updatedUser;
     }
 
     async deleteUser(id) {
-        const user = await User.query().findById(id);
+        const user = await Users.query().findById(id);
         if (!user) {
             throw new Error("User not found");
         }
-        await User.query().deleteById(id);
+        await Users.query().deleteById(id);
         return { id };
     }
 
     async loginUser(payload) {
-        const user = await User.query().findOne({
+        const user = await Users.query().findOne({
             email: payload.email
         });
 
@@ -87,7 +87,7 @@ class UserService {
     }
 
     async forgotPassword(payload) {
-        const user = await User.query().findOne({
+        const user = await Users.query().findOne({
             email: payload.email
         });
 
@@ -108,7 +108,7 @@ class UserService {
 
     async resetPassword(payload) {
         const decoded = jwt.verify(payload.token, process.env.JWT_SECRET);
-        const user = await User.query().findById(decoded.id);
+        const user = await Users.query().findById(decoded.id);
 
         if (!user) {
             throw new Error("Invalid token");
@@ -117,7 +117,7 @@ class UserService {
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(payload.password, salt);
 
-        await User.query().patchAndFetchById(decoded.id, { password: hashedPassword });
+        await Users.query().patchAndFetchById(decoded.id, { password: hashedPassword });
         return { message: "Password reset successful" };
     }
 }
