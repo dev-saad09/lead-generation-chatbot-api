@@ -7,8 +7,8 @@ class LeadService {
     async addLead(leadData) {
         const lead = await Leads.query().insert({
             ...leadData,
-            createdAt: moment().format(),
-            updatedAt: moment().format()
+            createDt: moment().format(),
+            updateDt: moment().format()
         });
 
         log.info({ lead }, "Successfully created new lead");

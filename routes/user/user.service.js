@@ -14,7 +14,7 @@ class UserService {
             name: payload.name,
             email: payload.email,
             password: hashedPassword,
-            role: payload.role
+            roleId: payload.roleId
         });
 
         return user;

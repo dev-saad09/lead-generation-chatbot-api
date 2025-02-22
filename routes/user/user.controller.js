@@ -10,7 +10,7 @@ class UserController {
                 name: Joi.string().required().trim(),
                 email: Joi.string().email().required(),
                 password: Joi.string().required().trim(),
-                role: Joi.string().required().valid("admin", "agent")
+                roleId: Joi.string().required()
             });
 
             const { error } = schema.validate(payload);

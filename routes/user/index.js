@@ -26,7 +26,7 @@ router.post(
                           name: { type: 'string' },
                           email: { type: 'string', format: 'email' },
                           password: { type: 'string' },
-                          role: { type: 'string', enum: ['admin', 'agent'] }
+                          roleId: { type: 'string' }
                       },
                       required: ['name', 'email', 'password', 'role']
                   }

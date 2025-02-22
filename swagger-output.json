@@ -347,12 +347,8 @@
                   "password": {
                     "type": "string"
                   },
-                  "role": {
-                    "type": "string",
-                    "enum": [
-                      "admin",
-                      "agent"
-                    ]
+                  "roleId": {
+                    "type": "string"
                   }
                 },
                 "required": [
