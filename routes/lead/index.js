@@ -38,7 +38,6 @@ router.post(
                           agentId: { type: 'string', format: 'uuid' },
                           status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost'] }
                       },
-                      required: ['name', 'email', 'cellno', 'address', 'city', 'language', 'systemType', 'units', 'billAmount', 'totalArea', 'billType', 'billImage', 'agentId']
                   }
               }
           }

@@ -7,19 +7,19 @@ class LeadController {
         try {
             // Validate request payload
             const schema = Joi.object({
-                name: Joi.string().required().trim(),
-                email: Joi.string().email().required(),
+                name: Joi.string().trim().required(),
+                email: Joi.string().email(),
                 cellno: Joi.string().required(),
-                address: Joi.string().required().trim(),
-                city: Joi.string().required().trim(),
-                language: Joi.string().required().trim(),
-                systemType: Joi.string().required().trim(),
-                units: Joi.number().required(),
-                billAmount: Joi.number().required(),
-                totalArea: Joi.number().required(),
-                billType: Joi.string().required().trim(),
-                billImage: Joi.string().required().trim(),
-                agentId: Joi.string().uuid().required(),
+                address: Joi.string().trim(),
+                city: Joi.string().trim(),
+                language: Joi.string().trim(),
+                systemType: Joi.string().trim(),
+                units: Joi.number(),
+                billAmount: Joi.number(),
+                totalArea: Joi.number(),
+                billType: Joi.string().trim(),
+                billImage: Joi.string().trim(),
+                agentId: Joi.string().uuid(),
                 status: Joi.string().valid(...LEAD_STATUSES).default("New Inquiry")
             });
 

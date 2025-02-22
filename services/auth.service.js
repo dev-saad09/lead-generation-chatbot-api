@@ -18,6 +18,7 @@ class service {
                 const decoded = jwt.verify(tokenHash, ACCESS_TOKEN_SECRET);
                 return decoded;
             } catch (error) {
+                logger.error(error, `${__file}:${__line} ` + "Got error in authentication middleware");
                 const responseMessage = "Invalid bearer token.";
                 throw new Error(responseMessage);
             }
@@ -27,10 +28,11 @@ class service {
                 if (username === BASIC_AUTH_USERNAME && password === BASIC_AUTH_PASSWORD) {
                     return { username };
                 } else {
-                    return res.status(401).json({ message: "Invalid credentials" });
+                    const responseMessage = "Invalid basic token.";
+                    throw new Error(responseMessage);
                 }
             } catch (error) {
-                logger.error("error", error);
+                logger.error(error, `${__file}:${__line} ` + "Got error in authentication middleware");
                 const responseMessage = "Invalid basic token.";
                 throw new Error(responseMessage);
             }

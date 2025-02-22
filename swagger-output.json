@@ -99,22 +99,7 @@
                       "Closed - Lost"
                     ]
                   }
-                },
-                "required": [
-                  "name",
-                  "email",
-                  "cellno",
-                  "address",
-                  "city",
-                  "language",
-                  "systemType",
-                  "units",
-                  "billAmount",
-                  "totalArea",
-                  "billType",
-                  "billImage",
-                  "agentId"
-                ]
+                }
               }
             }
           }
