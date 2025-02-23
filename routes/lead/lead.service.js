@@ -37,7 +37,7 @@ class LeadService {
 
         const updatedLead = await Leads.query().patchAndFetchById(id, {
             ...updateData,
-            updatedAt: moment().format()
+            updateDt: moment().format()
         });
 
         log.info({ updatedLead }, "Successfully updated lead");

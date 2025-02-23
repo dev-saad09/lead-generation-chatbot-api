@@ -35,8 +35,18 @@ CREATE TABLE IF NOT EXISTS leads (
     total_area INT,
     bill_type VARCHAR(255),
     bill_image VARCHAR(255),
+    lead_source VARCHAR(255),
     agent_id UUID REFERENCES users(id),
     status VARCHAR(255) CHECK (status IN ('New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost')),
     create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Create interaction history table
+DROP TABLE IF EXISTS interaction_history;
+CREATE TABLE IF NOT EXISTS interaction_history (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    cellno VARCHAR(255),
+    name VARCHAR(255),
+    create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );

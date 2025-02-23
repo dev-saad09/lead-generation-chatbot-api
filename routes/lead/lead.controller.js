@@ -2,6 +2,7 @@ const Joi = require("joi");
 const log = require("../../logger");
 const controllerService = require("./lead.service");
 const { LEAD_STATUSES } = require("../../consts/leadStatus");
+
 class LeadController {
     async addLead(payload) {
         try {
@@ -14,25 +15,37 @@ class LeadController {
                 city: Joi.string().trim(),
                 language: Joi.string().trim(),
                 systemType: Joi.string().trim(),
-                units: Joi.number(),
-                billAmount: Joi.number(),
-                totalArea: Joi.number(),
+                consumptionType: Joi.string().trim(),
+                consumptionValue: Joi.string().trim(),
+                calculatedValue: Joi.string().trim(),
+                totalArea: Joi.string().trim(),
                 billType: Joi.string().trim(),
                 billImage: Joi.string().trim(),
+                leadSource: Joi.string().trim(),
                 agentId: Joi.string().uuid(),
                 status: Joi.string().valid(...LEAD_STATUSES).default("New Inquiry")
             });
 
-            const { error } = schema.validate(payload);
+            const { error, value } = schema.validate(payload);
 
             if (error) {
+                log.error({
+                    error: error.details[0].message,
+                    method: "POST /leads"
+                });
                 return {
                     success: false,
-                    message: error.details[0].message
+                    message: error.details[0].message,
+                    error: error.details[0]
                 };
             }
 
-            const response = await controllerService.addLead(payload);
+            const response = await controllerService.addLead(value);
+
+            log.info("Lead added successfully", {
+                leadId: response.id,
+                method: "POST /leads"
+            });
 
             return {
                 success: true,
@@ -40,17 +53,16 @@ class LeadController {
                 data: response
             };
         } catch (error) {
-            log.error({
+            log.error("Error adding lead", {
                 error: error.message,
                 payload,
-                message: "Error adding lead",
                 method: "POST /leads"
             });
 
             return {
                 success: false,
                 message: error.message || "Failed to add lead",
-                data: error.data
+                error: error.data || error
             };
         }
     }
@@ -58,20 +70,27 @@ class LeadController {
     async getLeads() {
         try {
             const response = await controllerService.getLeads();
+
+            log.info("Leads retrieved successfully", {
+                count: response.length,
+                method: "GET /leads"
+            });
+
             return {
                 success: true,
-                data: response
+                message: "Leads retrieved successfully",
+                data: response,
+                count: response.length
             };
         } catch (error) {
             log.error({
                 error: error.message,
-                message: "Error getting leads",
                 method: "GET /leads"
             });
             return {
                 success: false,
                 message: error.message || "Failed to get leads",
-                data: error.data
+                error: error.data || error
             };
         }
     }
@@ -79,21 +98,27 @@ class LeadController {
     async getLeadById(id) {
         try {
             const response = await controllerService.getLeadById(id);
+
+            log.info("Lead retrieved successfully", {
+                leadId: id,
+                method: "GET /leads/:id"
+            });
+
             return {
                 success: true,
+                message: "Lead retrieved successfully",
                 data: response
             };
         } catch (error) {
             log.error({
                 error: error.message,
-                id,
-                message: "Error getting lead",
+                leadId: id,
                 method: "GET /leads/:id"
             });
             return {
                 success: false,
                 message: error.message || "Failed to get lead",
-                data: error.data
+                error: error.data || error
             };
         }
     }
@@ -108,25 +133,38 @@ class LeadController {
                 city: Joi.string().trim(),
                 language: Joi.string().trim(),
                 systemType: Joi.string().trim(),
-                units: Joi.number(),
-                billAmount: Joi.number(),
-                totalArea: Joi.number(),
+                consumptionType: Joi.string().trim(),
+                consumptionValue: Joi.string().trim(),
+                calculatedValue: Joi.string().trim(),
+                totalArea: Joi.string().trim(),
                 billType: Joi.string().trim(),
                 billImage: Joi.string().trim(),
                 agentId: Joi.string().uuid(),
                 status: Joi.string().valid(...LEAD_STATUSES)
-            });
+            }).min(1);
 
-            const { error } = schema.validate(payload);
+            const { error, value } = schema.validate(payload);
 
             if (error) {
+                log.error({
+                    error: error.details[0].message,
+                    leadId: id,
+                    method: "PUT /leads/:id"
+                });
                 return {
                     success: false,
-                    message: error.details[0].message
+                    message: error.details[0].message,
+                    error: error.details[0]
                 };
             }
 
-            const response = await controllerService.updateLead(id, payload);
+            const response = await controllerService.updateLead(id, value);
+
+            log.info("Lead updated successfully", {
+                leadId: id,
+                method: "PUT /leads/:id"
+            });
+
             return {
                 success: true,
                 message: "Lead updated successfully",
@@ -135,15 +173,14 @@ class LeadController {
         } catch (error) {
             log.error({
                 error: error.message,
-                id,
+                leadId: id,
                 payload,
-                message: "Error updating lead",
                 method: "PUT /leads/:id"
             });
             return {
                 success: false,
                 message: error.message || "Failed to update lead",
-                data: error.data
+                error: error.data || error
             };
         }
     }
@@ -151,22 +188,27 @@ class LeadController {
     async deleteLead(id) {
         try {
             const response = await controllerService.deleteLead(id);
+
+            log.info("Lead deleted successfully", {
+                leadId: id,
+                method: "DELETE /leads/:id"
+            });
+
             return {
                 success: true,
                 message: "Lead deleted successfully",
-                data: response
+                data: { id, deleted: response }
             };
         } catch (error) {
             log.error({
                 error: error.message,
-                id,
-                message: "Error deleting lead",
+                leadId: id,
                 method: "DELETE /leads/:id"
             });
             return {
                 success: false,
                 message: error.message || "Failed to delete lead",
-                data: error.data
+                error: error.data || error
             };
         }
     }

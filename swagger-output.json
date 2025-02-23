@@ -67,10 +67,13 @@
                   "systemType": {
                     "type": "string"
                   },
-                  "units": {
+                  "consumptionType": {
+                    "type": "string"
+                  },
+                  "consumptionValue": {
                     "type": "integer"
                   },
-                  "billAmount": {
+                  "calculatedValue": {
                     "type": "integer"
                   },
                   "totalArea": {
@@ -80,6 +83,9 @@
                     "type": "string"
                   },
                   "billImage": {
+                    "type": "string"
+                  },
+                  "leadSource": {
                     "type": "string"
                   },
                   "agentId": {
@@ -222,10 +228,13 @@
                   "systemType": {
                     "type": "string"
                   },
-                  "units": {
+                  "consumptionType": {
+                    "type": "string"
+                  },
+                  "consumptionValue": {
                     "type": "integer"
                   },
-                  "billAmount": {
+                  "calculatedValue": {
                     "type": "integer"
                   },
                   "totalArea": {
