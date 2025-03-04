@@ -2,7 +2,7 @@ const moment = require("moment");
 const log = require("../../logger");
 const { ErrorData } = require("../../errors");
 const { Leads } = require("../../models");
-
+const { getNextAgentIdRoundRobin } = require("../../services/roundRobin.service");
 class LeadService {
     async addLead(leadData) {
         const lead = await Leads.query().insert({
@@ -53,6 +53,23 @@ class LeadService {
         await Leads.query().deleteById(id);
         log.info({ id }, "Successfully deleted lead");
         return true;
+    }
+
+    async assignAgentToLead(leadId) {
+        const agentId = await getNextAgentIdRoundRobin();
+
+        const updatedLead = await Leads.query()
+            .patchAndFetchById(leadId, {
+                agentId,
+                updateDt: new Date().toISOString()
+            })
+            .withGraphFetched("agent");
+
+        if (!updatedLead) {
+            throw new Error("Lead not found");
+        }
+
+        return updatedLead;
     }
 }
 

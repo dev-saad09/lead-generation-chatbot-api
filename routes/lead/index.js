@@ -33,7 +33,7 @@ router.post(
                           consumptionType: { type: 'string' },
                           consumptionValue: { type: 'integer' },
                           calculatedValue: { type: 'integer' },
-                          totalArea: { type: 'integer' },
+                          totalArea: { type: 'string' },
                           billType: { type: 'string' },
                           billImage: { type: 'string' },
                           leadSource: { type: 'string' },
@@ -162,7 +162,7 @@ router.put(
                           consumptionType: { type: 'string' },
                           consumptionValue: { type: 'integer' },
                           calculatedValue: { type: 'integer' },
-                          totalArea: { type: 'integer' },
+                          totalArea: { type: 'string' },
                           billType: { type: 'string' },
                           billImage: { type: 'string' },
                           agentId: { type: 'string', format: 'uuid' },
@@ -223,6 +223,45 @@ router.delete(
         const result = await routerController.deleteLead(req.params.id);
 
         return res.status(200).json(result);
+    }
+);
+
+/**
+ * @route PUT /leads/:id/assign-agent
+ * @desc Assign an agent to a lead
+ * @access Private
+ */
+router.put(
+    "/:id/assign-agent",
+    authenticate(),
+    async (req, res, next) => {
+    /*
+      #swagger.tags = ['Leads']
+      #swagger.description = 'Assign an agent to a lead.'
+      #swagger.parameters['id'] = {
+          in: 'path',
+          description: 'Lead ID',
+          required: true,
+          type: 'string',
+          format: 'uuid'
+      }
+      #swagger.responses[200] = {
+          description: 'Agent assigned successfully.',
+          content: { "application/json": { schema: { $ref: '#/definitions/responseObject' } } }
+      }
+    */
+        logger.info({
+            user: req.user,
+            params: req.params,
+            method: "PUT /leads/:id/assign-agent"
+        });
+
+        try {
+            const result = await routerController.assignAgentToLead(req.params.id);
+            return res.status(200).json(result);
+        } catch (error) {
+            next(error);
+        }
     }
 );
 

@@ -1,6 +1,6 @@
 const Joi = require("joi");
 const log = require("../../logger");
-const controllerService = require("./lead.service");
+const leadService = require("./lead.service");
 const { LEAD_STATUSES } = require("../../consts/leadStatus");
 
 class LeadController {
@@ -16,8 +16,8 @@ class LeadController {
                 language: Joi.string().trim(),
                 systemType: Joi.string().trim(),
                 consumptionType: Joi.string().trim(),
-                consumptionValue: Joi.string().trim(),
-                calculatedValue: Joi.string().trim(),
+                consumptionValue: Joi.number(),
+                calculatedValue: Joi.number(),
                 totalArea: Joi.string().trim(),
                 billType: Joi.string().trim(),
                 billImage: Joi.string().trim(),
@@ -40,7 +40,7 @@ class LeadController {
                 };
             }
 
-            const response = await controllerService.addLead(value);
+            const response = await leadService.addLead(value);
 
             log.info("Lead added successfully", {
                 leadId: response.id,
@@ -69,7 +69,7 @@ class LeadController {
 
     async getLeads() {
         try {
-            const response = await controllerService.getLeads();
+            const response = await leadService.getLeads();
 
             log.info("Leads retrieved successfully", {
                 count: response.length,
@@ -97,7 +97,7 @@ class LeadController {
 
     async getLeadById(id) {
         try {
-            const response = await controllerService.getLeadById(id);
+            const response = await leadService.getLeadById(id);
 
             log.info("Lead retrieved successfully", {
                 leadId: id,
@@ -134,8 +134,8 @@ class LeadController {
                 language: Joi.string().trim(),
                 systemType: Joi.string().trim(),
                 consumptionType: Joi.string().trim(),
-                consumptionValue: Joi.string().trim(),
-                calculatedValue: Joi.string().trim(),
+                consumptionValue: Joi.number(),
+                calculatedValue: Joi.number(),
                 totalArea: Joi.string().trim(),
                 billType: Joi.string().trim(),
                 billImage: Joi.string().trim(),
@@ -158,7 +158,7 @@ class LeadController {
                 };
             }
 
-            const response = await controllerService.updateLead(id, value);
+            const response = await leadService.updateLead(id, value);
 
             log.info("Lead updated successfully", {
                 leadId: id,
@@ -187,7 +187,7 @@ class LeadController {
 
     async deleteLead(id) {
         try {
-            const response = await controllerService.deleteLead(id);
+            const response = await leadService.deleteLead(id);
 
             log.info("Lead deleted successfully", {
                 leadId: id,
@@ -211,7 +211,16 @@ class LeadController {
                 error: error.data || error
             };
         }
-    }
+    };
+
+    async assignAgentToLead(leadId) {
+        try {
+            const result = await leadService.assignAgentToLead(leadId);
+            return { success: true, data: result };
+        } catch (error) {
+            throw new Error(error.message);
+        }
+    };
 }
 
 module.exports = new LeadController();

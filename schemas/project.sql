@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
     email VARCHAR(255) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
     role_id UUID REFERENCES roles(id),
+    phone VARCHAR(255),
     create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -30,14 +31,15 @@ CREATE TABLE IF NOT EXISTS leads (
     city VARCHAR(255),
     language VARCHAR(255),
     system_type VARCHAR(255),
-    units INT,
-    bill_amount INT,
+    calculate_value INT,
+    consumption_value INT,
+    consumption_type VARCHAR(255),
     total_area INT,
     bill_type VARCHAR(255),
     bill_image VARCHAR(255),
     lead_source VARCHAR(255),
     agent_id UUID REFERENCES users(id),
-    status VARCHAR(255) CHECK (status IN ('New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost')),
+    status VARCHAR(255) CHECK (status IN ('New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Meeting Done', 'Proposal Sent', 'Further Negotiation', 'Proposal Accepted', 'Proposal Rejected', 'Design Shared', 'Execution Phase', 'System Installed')),
     create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     update_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
