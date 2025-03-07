@@ -52,3 +52,15 @@ CREATE TABLE IF NOT EXISTS interaction_history (
     name VARCHAR(255),
     create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Create notification table
+DROP TABLE IF EXISTS template_messages;
+CREATE TABLE IF NOT EXISTS template_messages (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    template_name VARCHAR(255) UNIQUE NOT NULL,
+    template_type VARCHAR(255) NOT NULL,
+    template_message VARCHAR(255),
+    create_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    update_dt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status VARCHAR(255) CHECK (status IN ('active', 'inactive'))
+);

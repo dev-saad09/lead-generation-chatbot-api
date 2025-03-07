@@ -32,13 +32,13 @@ router.post(
                           systemType: { type: 'string' },
                           consumptionType: { type: 'string' },
                           consumptionValue: { type: 'integer' },
-                          calculatedValue: { type: 'integer' },
+                          calculatedKilowatt: { type: 'integer' },
                           totalArea: { type: 'string' },
                           billType: { type: 'string' },
                           billImage: { type: 'string' },
                           leadSource: { type: 'string' },
                           agentId: { type: 'string', format: 'uuid' },
-                          status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost'] }
+                          status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Meeting Done', 'Proposal Sent', 'Further Negotiation', 'Proposal Accepted', 'Proposal Rejected', 'Design Shared', 'Execution Phase', 'System Installed'] }
                       },
                   }
               }
@@ -161,12 +161,13 @@ router.put(
                           systemType: { type: 'string' },
                           consumptionType: { type: 'string' },
                           consumptionValue: { type: 'integer' },
-                          calculatedValue: { type: 'integer' },
+                          calculatedKilowatt: { type: 'integer' },
                           totalArea: { type: 'string' },
                           billType: { type: 'string' },
                           billImage: { type: 'string' },
+                          leadSource: { type: 'string' },
                           agentId: { type: 'string', format: 'uuid' },
-                          status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Proposal Sent', 'In Negotiation', 'Closed - Won', 'Closed - Lost'] }
+                          status: { type: 'string', enum: ['New Inquiry', 'Qualified Prospect', 'Referral Lead', 'Meeting Scheduled', 'Meeting Done', 'Proposal Sent', 'Further Negotiation', 'Proposal Accepted', 'Proposal Rejected', 'Design Shared', 'Execution Phase', 'System Installed'] }
                       }
                   }
               }

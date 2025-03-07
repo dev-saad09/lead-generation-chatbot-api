@@ -1,8 +1,9 @@
 const moment = require("moment");
 const log = require("../../logger");
 const { ErrorData } = require("../../errors");
-const { Leads } = require("../../models");
+const { Leads, TemplateMessages } = require("../../models");
 const { getNextAgentIdRoundRobin } = require("../../services/roundRobin.service");
+const { sendTemplateMessage } = require("../../services/chatbot.service");
 class LeadService {
     async addLead(leadData) {
         const lead = await Leads.query().insert({
@@ -41,6 +42,22 @@ class LeadService {
         });
 
         log.info({ updatedLead }, "Successfully updated lead");
+
+        if (updateData.status) {
+            const notification = await TemplateMessages.query()
+                .where({ status: updateData.status })
+                .first();
+
+            if (!notification) {
+                throw new ErrorData("Notification not found");
+            }
+            const templateName = notification.templateName;
+            const parameters = [
+                { name: "1", value: notification.message }
+            ];
+            await sendTemplateMessage(lead.cellno, templateName, parameters);
+        }
+
         return updatedLead;
     }
 

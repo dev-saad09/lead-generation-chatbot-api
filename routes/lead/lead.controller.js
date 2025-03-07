@@ -17,7 +17,7 @@ class LeadController {
                 systemType: Joi.string().trim(),
                 consumptionType: Joi.string().trim(),
                 consumptionValue: Joi.number(),
-                calculatedValue: Joi.number(),
+                calculatedKilowatt: Joi.number(),
                 totalArea: Joi.string().trim(),
                 billType: Joi.string().trim(),
                 billImage: Joi.string().trim(),
@@ -135,10 +135,11 @@ class LeadController {
                 systemType: Joi.string().trim(),
                 consumptionType: Joi.string().trim(),
                 consumptionValue: Joi.number(),
-                calculatedValue: Joi.number(),
+                calculatedKilowatt: Joi.number(),
                 totalArea: Joi.string().trim(),
                 billType: Joi.string().trim(),
                 billImage: Joi.string().trim(),
+                leadSource: Joi.string().trim(),
                 agentId: Joi.string().uuid(),
                 status: Joi.string().valid(...LEAD_STATUSES)
             }).min(1);
